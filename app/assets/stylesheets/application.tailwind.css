@@ -13,5 +13,9 @@
     w-full 
     rounded;
   }
+
+  .form-label {
+    @apply font-bold
+  }
 }
 
