@@ -81,3 +81,5 @@ gem "tailwindcss-rails", "~> 2.0"
 gem "rspec-rails", "~> 5.1"
 
 gem "httparty", "~> 0.20.0"
+
+gem "slim-rails", "~> 3.5"
