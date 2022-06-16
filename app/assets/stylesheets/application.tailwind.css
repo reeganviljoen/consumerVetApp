@@ -34,5 +34,10 @@
     text-blue-500
     text-4xl
   }
+
+  a {
+    @apply text-blue-600
+    underline
+  }
 }
 
