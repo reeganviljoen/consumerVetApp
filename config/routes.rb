@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post '/users', to: 'users#create'
 
   get '/signin', to: 'users#signin'
-  post '/sigin', to: 'users#authenticate'
+  post '/signin', to: 'users#authenticate'
   # Defines the root path route ("/")
   # root "articles#index"
 end
