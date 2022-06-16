@@ -8,6 +8,7 @@
     @apply bg-blue-500
     hover:bg-blue-700 
     text-white 
+    text-lg
     font-bold 
     py-1 
     w-1/3
