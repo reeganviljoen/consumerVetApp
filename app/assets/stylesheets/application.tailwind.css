@@ -10,12 +10,21 @@
     text-white 
     font-bold 
     py-1 
-    w-full 
+    w-1/3
     rounded;
   }
 
-  .form-label {
+  label {
     @apply font-bold
+  }
+
+  input {
+    @apply w-full
+  }
+
+  select {
+    @apply block
+    w-full
   }
 }
 

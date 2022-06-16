@@ -1,20 +1,21 @@
-= form_with url:'/users', local:true do |form|
-  div
-    = form.label :name, class:'form-label'
-    br/
-    = form.text_field :name
-  div
-    = form.label :email, class:'form-label'
-    br/
-    = form.text_field :email
-  div
-    = form.label :role, class:'form-label'
-    br/
-    = form.text_field :role
-  div
-    = form.label :password, class:'form-label'
-    br/
-    = form.password_field :password
-  div 
-    = form.submit 'signup', class:'btn'
-  
+div class='w-full flex justify-center'
+  = form_with url:'/users', local:true, class: 'w-1/3' do |form|
+    div class='my-4'
+      = form.label :name
+      br/
+      = form.text_field :name
+    div class='my-4'
+      = form.label :email
+      br/
+      = form.text_field :email
+    div class='my-4'
+      = form.label :role
+      br/
+      = form.select :role, ['owner','vet'], class:'form-select'
+    div class='my-4'
+      = form.label :password
+      br/
+      = form.password_field :password
+    div
+      = form.submit 'signup', class:'btn'
+    
