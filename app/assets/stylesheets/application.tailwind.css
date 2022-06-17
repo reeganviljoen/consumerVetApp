@@ -39,5 +39,14 @@
     @apply text-blue-600
     underline
   }
+
+  .sidenav {
+    @apply left-0
+    h-full
+    bg-blue-400
+    fixed
+    w-1/6
+    top-0
+  }
 }
 
