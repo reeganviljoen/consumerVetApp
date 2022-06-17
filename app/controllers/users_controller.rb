@@ -4,6 +4,7 @@ class UsersController < ApplicationController
     if @response.success?
       redirect_to "/users/#{@response['id']}/show"
       cookies[:token] = @response['auth_token']
+      cookies[:user] = @response
     else 
       render :new, status: :unprocessable_entity
     end
@@ -14,13 +15,14 @@ class UsersController < ApplicationController
     if @response.success?
       redirect_to "/users/#{@response['id']}/show"
       cookies[:token] = @response['auth_token']
+      cookies[:user] = @response
     else 
       render :signin, status: :unauthorized
     end 
   end
 
   def show
-    
+    @user = JSON.parse(cookies[:user])
   end
 
   private
