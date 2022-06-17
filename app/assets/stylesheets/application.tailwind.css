@@ -45,8 +45,8 @@
     h-full
     bg-blue-400
     fixed
-    w-1/6
     top-0
+    w-1/6
     shadow-md
   }
 
@@ -59,6 +59,10 @@
     font-bold
     text-left
     shadow-md
+  }
+
+  .page-body{
+    margin-left: 16rem
   }
 }
 
