@@ -10,7 +10,26 @@ div class='flex flex-col sidenav '
       = link_to 'Appointments'
 div class='page-body' 
   = turbo_frame_tag 'content'
-    h1 #{@user['name']}
+    div class='flex'
+      div class='mx-4'
+        h1 Name: #{@user['name']}
+      div class='mx-4'
+        h1 #{@user['pets'].length} Pets
+    div class='card'
+      h2 email
+      p #{@user['email']}
+    div class='card'
+      h2 Pets
+
+      - @user['pets'].each do |pet|
+          div class='flex'
+            p class='mr-4'  name:#{pet['name']}
+            p breed:#{pet['animal']}
+
+
+    
+      
+
 
 
     
