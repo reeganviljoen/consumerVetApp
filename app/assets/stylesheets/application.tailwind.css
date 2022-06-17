@@ -47,6 +47,7 @@
     fixed
     w-1/6
     top-0
+    shadow-md
   }
 
   .nav-item {
@@ -57,6 +58,7 @@
     text-xl
     font-bold
     text-left
+    shadow-md
   }
 }
 
