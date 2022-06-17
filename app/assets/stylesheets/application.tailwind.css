@@ -35,7 +35,7 @@
     text-4xl
   }
 
-  a {
+  .link {
     @apply text-blue-600
     underline
   }
@@ -47,6 +47,16 @@
     fixed
     w-1/6
     top-0
+  }
+
+  .nav-item {
+    @apply rounded
+    text-white
+    bg-blue-400
+    hover:bg-blue-300
+    text-xl
+    font-bold
+    text-left
   }
 }
 
