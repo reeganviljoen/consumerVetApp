@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   get '/signin', to: 'users#signin'
   post '/signin', to: 'users#authenticate'
 
-  get '/users/:id/show', to: 'users#show'
+  # get '/users/:id/show', to: 'users#show'
+  resources :users, only: [:show] do
+    resources :pets, only: [:index]
+  end
+  get '/users/:id/pets', to: 'pets#index'
   # Defines the root path route ("/")
-  # root "articles#index"
+  root "users#signin"
 end
