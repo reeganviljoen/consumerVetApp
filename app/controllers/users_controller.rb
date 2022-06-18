@@ -2,9 +2,10 @@ class UsersController < ApplicationController
   def create
     @response = HTTParty.post('http://localhost:3000/signup', body:user_params)
     if @response.success?
-      redirect_to "/users/#{@response['id']}/show"
+      cookies[:user] = @response.to_s
       cookies[:token] = @response['auth_token']
-      cookies[:user] = @response
+      @user = JSON.parse(cookies[:user])
+      redirect_to user_path(@user['id']) 
     else 
       render :new, status: :unprocessable_entity
     end
@@ -13,9 +14,10 @@ class UsersController < ApplicationController
   def authenticate
     @response = HTTParty.post('http://localhost:3000/auth/login', body:user_params)
     if @response.success?
-      redirect_to "/users/#{@response['id']}/show"
+      cookies[:user] = @response.to_s
       cookies[:token] = @response['auth_token']
-      cookies[:user] = @response
+      @user = JSON.parse(cookies[:user])
+      redirect_to user_path(@user['id']) 
     else 
       render :signin, status: :unauthorized
     end 
