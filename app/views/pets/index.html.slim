@@ -14,3 +14,6 @@ div class='flex flex-col sidenav '
     div class='flex'
       div class='mx-4'
         h1 Pets
+    - @user['pets'].each do |pet|
+      div class='card'
+        h2 #{pet['name']}
