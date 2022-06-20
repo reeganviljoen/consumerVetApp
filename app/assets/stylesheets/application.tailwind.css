@@ -50,6 +50,12 @@
     dark:text-white
   }
 
+  h3 {
+    @apply font-bold
+    text-blue-500
+    text-lg
+    dark:text-white
+  }
   .link {
     @apply text-blue-600
     underline
