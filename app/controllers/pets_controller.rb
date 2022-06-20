@@ -1,12 +1,10 @@
 class PetsController < ApplicationController
-  before_action :set_user
   
   def index
-    @pets = @user['pets']
-  end
-
-  private
-  def set_user
-    @user = JSON.parse(cookies[:user])
+    header = {
+      'Authorization': JSON.parse(cookies[:user])['token']
+    }
+    response = HTTParty.get('http://localhost:3000/user', headers: header)
+    @user = JSON.parse(response.to_s)
   end
 end
