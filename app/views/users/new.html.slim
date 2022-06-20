@@ -6,21 +6,21 @@ div class='flex flex-col w-full mt-28'
       div class='my-4'
         = form.label :name
         br/
-        = form.text_field :name
+        = form.text_field :name, class:'dark:bg-gray-200 '
       div class='my-4'
         = form.label :email
         br/
-        = form.text_field :email
+        = form.text_field :email, class:'dark:bg-gray-200 '
       div class='my-4'
         = form.label :role
         br/
-        = form.select :role, ['owner','vet'], class:'form-select'
+        = form.select :role, ['owner','vet'], class:'dark:bg-gray-200 form-select'
       div class='my-4'
         = form.label :password
         br/
-        = form.password_field :password
+        = form.password_field :password, class:'dark:bg-gray-200'
       div
         = form.submit 'signup', class:'btn'
       div class='flex flex-row'
-        p already have an account ?
+        p class='dark:text-white' already have an account ?
         = link_to 'sign-in', '/signin',class:'link'
