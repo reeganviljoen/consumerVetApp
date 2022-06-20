@@ -39,22 +39,35 @@
   h1 {
     @apply font-bold
     text-blue-500
-    text-4xl
+    text-5xl
     dark:text-white
   }
 
   h2 {
     @apply font-bold
     text-blue-500
-    text-2xl
+    text-4xl
     dark:text-white
   }
 
   h3 {
     @apply font-bold
     text-blue-500
-    text-lg
+    text-3xl
     dark:text-white
+  }
+  h4 {
+    @apply font-bold
+    text-blue-500
+    text-xl
+    dark:text-white 
+  }
+
+  h5 {
+    @apply font-bold
+    text-blue-500
+    text-lg
+    dark:text-white  
   }
 
   hr {
