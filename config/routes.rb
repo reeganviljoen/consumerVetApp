@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 
   # get '/users/:id/show', to: 'users#show'
   resources :users, only: [:show] do
-    resources :pets, only: [:index]
+    resources :pets, only: [:index] do
+      resources :registrations, only: [:new, :create]
+    end
   end
   get '/users/:id/pets', to: 'pets#index'
   # Defines the root path route ("/")
