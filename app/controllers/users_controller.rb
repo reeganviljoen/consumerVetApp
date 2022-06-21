@@ -2,32 +2,19 @@ class UsersController < ApplicationController
   def create
     @response = HTTParty.post('http://localhost:3000/signup', body:user_params)
     if @response.success?
-      cookies[:user] = {
-        id:@response['id'],
-        email:@response['email'],
-        name:@response['name'],
-        pets:@response['pets'].length,
-        token:@response['auth_token']
-      }.to_json
-      @user = JSON.parse(cookies[:user])
-      redirect_to user_path(@user['id']) 
+      @user = JSON.parse(response.to_s)
+      cookies[:token] = @user['auth_token']
+      redirect_to user_path(@user['id'])  
     else 
       render :new, status: :unprocessable_entity
     end
   end
 
   def authenticate
-    @response = HTTParty.post('http://localhost:3000/auth/login', body:user_params)
-    if @response.success?
-      cookies[:user] = {
-        id:@response['id'],
-        email:@response['email'],
-        name:@response['name'],
-        pets:@response['pets'].length,
-        token:@response['auth_token']
-      }.to_json
-
-      @user = JSON.parse(cookies[:user])
+    response = HTTParty.post('http://localhost:3000/auth/login', body:user_params)
+    if response.success?
+      @user = JSON.parse(response.to_s)
+      cookies[:token] = @user['auth_token']
       redirect_to user_path(@user['id']) 
     else 
       render :signin, status: :unauthorized
@@ -35,7 +22,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = JSON.parse(cookies[:user])
+    header = {
+      'Authorization': cookies[:token]
+    }
+    response = HTTParty.get('http://localhost:3000/user', headers: header)
+    @user = JSON.parse(response.to_s)
   end
 
   private
