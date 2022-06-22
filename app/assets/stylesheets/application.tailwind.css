@@ -38,6 +38,13 @@
     @apply text-base
     h-8
   }
+  .btn-xl {
+    @apply text-xl
+    w-screen
+    h-10
+    px-2;
+    width:30%
+  }
 
   label {
     @apply font-bold
