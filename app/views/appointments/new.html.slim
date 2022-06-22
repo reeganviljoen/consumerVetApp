@@ -14,7 +14,7 @@ div class='flex flex-col sidenav '
       div class='flex justify-center'
         h1 New Appointment
       div class='w-full flex justify-center'
-        = form_with url:"/users/#{params[:user_id]}/pets/#{params[:pet_id]}/registrations/#{params[:registratio]}", local:true, class: 'w-full' do |form|
+        = form_with url:"/users/#{params[:user_id]}/pets/#{params[:pet_id]}/registrations/#{params[:registration_id]}/appointments", local:true, class: 'w-full' do |form|
           div class='my-4'
             = form.label :date
             br/
