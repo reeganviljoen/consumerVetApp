@@ -16,4 +16,9 @@ class PetsController < ApplicationController
     user_response = HTTParty.get('http://localhost:3000/user', headers: header)
     @user = JSON.parse(user_response.to_s)
   end
+
+  private
+  def pet_params
+    paraams.permit(:name, :animal)
+  end
 end
