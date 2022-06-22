@@ -25,8 +25,8 @@ div class='flex flex-col sidenav '
         - pet['registrations'].each do |registration|
           - if k > 0
             h4 class='pb-2' Vet: #{registration['user']}
+            h4 class='underline' Appointments
             -registration['appointments'].each do |appointment|
-              h4 class='underline' Appointments
               div class='flex'
                 p class='font-bold py-2' Date and time: 
                 p class='py-2' #{appointment['date'].to_time.strftime('%d %B - %H:%M')}
