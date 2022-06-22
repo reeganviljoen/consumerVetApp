@@ -17,21 +17,20 @@ class RegistrationsController < ApplicationController
   
   def create
     header = {
-      'Authorization': JSON.parse(cookies[:user])['token']
+      'Authorization': cookies['token']
     }
-    response = HTTParty.post("http://localhost:3000/pets#{registration_params[:id]}/register", 
-                              body:{vet_email: registration_params[:vet_email]})
-    if @response.success?
-
-      @user = JSON.parse(cookies[:user])
-      redirect_to user_path(@user['id']) 
+    response = HTTParty.post("http://localhost:3000/pets/#{registration_params[:pet_id]}/register" , body: {vet_email: registration_params[:vet_email]}, headers:header)
+    if response.success?
+      @user = JSON.parse(response.to_s)
+      redirect_to user_path(@user['id'])  
     else 
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity, alert: 'Registraion unsucessfull'
+
     end
   end
 
   private
   def registration_params
-    params.permit(:vet_email, :id)
+    params.permit(:vet_email, :pet_id)
   end
 end
