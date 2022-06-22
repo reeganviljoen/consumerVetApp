@@ -7,5 +7,8 @@ class AppointmentsController < ApplicationController
     @user = JSON.parse(response.to_s)
   end
 
-  
+  private
+  def appoitment_params
+    params.permit(:date)
+  end
 end
