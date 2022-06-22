@@ -32,3 +32,4 @@ div class='flex flex-col sidenav '
                 p class='py-2' #{appointment['date'].to_time.strftime('%d %B - %H:%M')}
             hr class='border-t-4 py-2'
           - k += 1
+    = link_to 'add a pet' ,new_user_pet_path(@user['id']), class:'btn btn-xl btn-form', data: {'turbo_action':'advance'}
