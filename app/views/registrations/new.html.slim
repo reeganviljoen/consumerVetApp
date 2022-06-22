@@ -9,16 +9,16 @@ div class='flex flex-col sidenav '
       = link_to 'Registrations'
     li class='nav-item flex align-center  mx-1 my-1 py-1'
       = link_to 'Appointments'
-= turbo_frame_tag 'content', data: {'turbo_action':'advance'}
+= turbo_frame_tag 'content'
   div class='page-body'
     div class='flex flex-col w-full mt-28'
       div class='flex justify-center'
         h1 New Registration
       div class='w-full flex justify-center'
-        = form_with local:true, class: 'w-2/3' do |form|
+        = form_with url:"/users/#{params[:user_id]}/pets/#{params[:pet_id]}/registrations", local:true, class: 'w-2/3' do |form|
           div class='my-4'
-            = form.label :role
+            = form.label :vet
             br/
-            = form.select :role, @vets, class:'dark:bg-gray-200 form-select'
+            = form.select :vet_email, @vets, class:'dark:bg-gray-200 form-select'
           div
             = form.submit 'Register', class:'btn btn-form btn-lg'
