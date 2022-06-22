@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   # get '/users/:id/show', to: 'users#show'
   resources :users, only: [:show] do
     resources :pets, only: [:index, :new, :create] do
-      resources :registrations, only: [:new, :create]
+      resources :registrations, only: [:new, :create] do
+        resources :appointments , only: [:new, :create]
+      end
     end
   end
   get '/users/:id/pets', to: 'pets#index'
