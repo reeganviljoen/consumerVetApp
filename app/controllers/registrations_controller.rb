@@ -5,10 +5,10 @@ class RegistrationsController < ApplicationController
     }
 
     user_response = HTTParty.get('http://localhost:3000/user', headers: header)
-    @user = JSON.parse(user_response.to_s)
+    @user = user_response.parsed_response
 
     vet_response = HTTParty.get('http://localhost:3000/vets', headers: header)
-    vets_hash = JSON.parse(vet_response.to_s)
+    vets_hash = vet_response.parsed_response
     @vets = []
     vets_hash.each do |vet|
       @vets.push([vet['name'],vet['email']])
@@ -21,7 +21,7 @@ class RegistrationsController < ApplicationController
     }
     response = HTTParty.post("http://localhost:3000/pets/#{registration_params[:pet_id]}/register" , body: {vet_email: registration_params[:vet_email]}, headers:header)
     if response.success?
-      @user = JSON.parse(response.to_s)
+      @user = response.parsed_response
       redirect_to user_path(@user['id'])  
     else 
       render :new, status: :unprocessable_entity, alert: 'Registraion unsucessfull'
