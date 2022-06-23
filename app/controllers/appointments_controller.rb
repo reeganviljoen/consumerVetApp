@@ -13,9 +13,8 @@ class AppointmentsController < ApplicationController
     }
 
     vet_response = HTTParty.get('http://localhost:3000/vets', headers: header)
-
     vet_email = ''
-    vet_response.each do |vet|
+    vet_response.parsed_response.each do |vet|
       vet['pets'].each do |pet|
         pet['registrations'].each do |registration| 
           if registration['id'].to_s == appointment_params[:registration_id]
@@ -31,6 +30,7 @@ class AppointmentsController < ApplicationController
 
     if response.success?
       @user = response.parsed_response
+      binding.pry
       redirect_to user_path(@user['id'])  
     else 
       render :new, status: :unprocessable_entity
