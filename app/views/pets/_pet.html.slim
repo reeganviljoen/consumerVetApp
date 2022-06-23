@@ -7,11 +7,14 @@ div class='card'
     = link_to 'Register a new vet' , new_user_pet_registration_path(@user['id'], pet['id']) , class:'btn btn-md btn-card', data: {'turbo_action':'advance'}  
   - k = 0 
   - pet['registrations'].each do |registration|
-    - if k > 0
+    - if k > 0 && (registration['accepted'] == true)
       h4 class='pb-2' Vet: #{registration['user']}
       div class='flex'
         h4 class='underline' Appointments
-        = link_to 'Make an appointmet' , new_user_pet_registration_appointment_path(@user['id'], pet['id'], registration['id']) , class:'btn btn-md btn-card', data: {'turbo_action':'advance'}  
+        = link_to 'Make an appointmet' , new_user_pet_registration_appointment_path(@user['id'], pet['id'], registration['id']), 
+          class:'btn btn-md btn-card', 
+          data: {'turbo_action':'advance'}  
+
       -registration['appointments'].each do |appointment|
         div class='flex'
           p class='font-bold py-2' Date and time: 
