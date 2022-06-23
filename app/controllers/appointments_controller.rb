@@ -17,7 +17,7 @@ class AppointmentsController < ApplicationController
 
     if response.success?
       @user = response.parsed_response
-      redirect_to user_path(@user['id'])  
+      redirect_to user_pets_path(@user['id'])  
     else 
       render :new, status: :unprocessable_entity
     end
