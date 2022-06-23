@@ -22,10 +22,9 @@ class RegistrationsController < ApplicationController
     response = HTTParty.post("http://localhost:3000/pets/#{registration_params[:pet_id]}/register" , body: {vet_email: registration_params[:vet_email]}, headers:header)
     if response.success?
       @user = response.parsed_response
-      redirect_to user_path(@user['id'])  
+      redirect_to user_pets_path(@user['id'])  
     else 
       render :new, status: :unprocessable_entity, alert: 'Registraion unsucessfull'
-
     end
   end
 
