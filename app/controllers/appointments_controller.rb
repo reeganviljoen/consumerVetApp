@@ -4,7 +4,7 @@ class AppointmentsController < ApplicationController
       'Authorization': cookies[:token]
     }
     response = HTTParty.get('http://localhost:3000/user', headers: header)
-    @user = JSON.parse(response.to_s)
+    @user = response.parsed_response
   end
 
   def create 
@@ -18,7 +18,7 @@ class AppointmentsController < ApplicationController
     vet_response.each do |vet|
       vet['pets'].each do |pet|
         pet['registrations'].each do |registration| 
-          if registration['id'] == appointment_params[:registration_id]
+          if registration['id'].to_s == appointment_params[:registration_id]
             vet_email = vet['email']
           end
         end
@@ -30,7 +30,7 @@ class AppointmentsController < ApplicationController
                               headers: header)
 
     if response.success?
-      @user = JSON.parse(response.to_s)
+      @user = response.parsed_response
       redirect_to user_path(@user['id'])  
     else 
       render :new, status: :unprocessable_entity
