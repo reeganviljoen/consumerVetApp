@@ -28,6 +28,10 @@ class RegistrationsController < ApplicationController
     end
   end
 
+  def show 
+    
+  end
+
   private
   def registration_params
     params.permit(:vet_email, :pet_id)
