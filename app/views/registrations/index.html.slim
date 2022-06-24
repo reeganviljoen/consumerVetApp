@@ -6,11 +6,11 @@
         h1 Registrations
     - @user['pets'].each do |pet|
       - pet['registrations'].each do |registration|
-        - if registration['accepted'] == false
+        - if registration['accepted'] == false && registration['user'] == @user['name']
           div class='card'
             div class='flex '
               h2 #{pet['name']}
-              = form_with url: user_registration_path(@user['id'], registration['id']) do |form|
+              = form_with url: user_registration_path(@user['id'], registration['id']), method: 'patch' do |form|
                 = form.submit 'Accept', class:'btn btn-md btn-card'
             hr class='w-full border-t-8 py-2'
             
