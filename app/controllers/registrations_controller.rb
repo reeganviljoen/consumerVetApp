@@ -1,10 +1,10 @@
 class RegistrationsController < ApplicationController
 
   def new 
-    user_response = HTTParty.get('http://localhost:3000/user', headers: @header)
+    user_response = HTTParty.get("#{@api_url}/user", headers: @header)
     @user = user_response.parsed_response
 
-    vet_response = HTTParty.get('http://localhost:3000/vets', headers: @header)
+    vet_response = HTTParty.get("#{@api_url}/vets", headers: @header)
     vets_hash = vet_response.parsed_response
     @vets = []
     vets_hash.each do |vet|
@@ -13,7 +13,7 @@ class RegistrationsController < ApplicationController
   end
   
   def create
-    response = HTTParty.post("http://localhost:3000/pets/#{registration_params[:pet_id]}/register" , 
+    response = HTTParty.post("#{@api_url}/pets/#{registration_params[:pet_id]}/register" , 
           body: {vet_email: registration_params[:vet_email]}, headers: @header)
     if response.success?
       @user = response.parsed_response
@@ -24,12 +24,12 @@ class RegistrationsController < ApplicationController
   end
 
   def index 
-    user_response = HTTParty.get('http://localhost:3000/user', headers: @header)
+    user_response = HTTParty.get("#{@api_url}/user", headers: @header)
     @user = user_response.parsed_response
   end
 
   def update
-    response = HTTParty.post("http://localhost:3000/registrations/#{registration_params[:id]}", headers: @header)
+    response = HTTParty.post("#{@api_url}/registrations/#{registration_params[:id]}", headers: @header)
     if response.success?
       @user = response.parsed_response
       redirect_to user_registrations_path(@user['id'])  

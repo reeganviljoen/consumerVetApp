@@ -1,17 +1,17 @@
 class PetsController < ApplicationController
   
   def index
-    response = HTTParty.get('http://localhost:3000/user', headers: @header)
+    response = HTTParty.get("#{@api_url}/user", headers: @header)
     @user = response.parsed_response
   end
 
   def new
-    response = HTTParty.get('http://localhost:3000/user', headers: @header)
+    response = HTTParty.get("#{@api_url}/user", headers: @header)
     @user = response.parsed_response
   end
 
   def create
-    response = HTTParty.post("http://localhost:3000/pets/create" , body: pet_params, headers: @header)
+    response = HTTParty.post("#{@api_url}/pets/create" , body: pet_params, headers: @header)
     if response.success?
       @user = response.parsed_response
       redirect_to user_pets_path(@user['id'])  

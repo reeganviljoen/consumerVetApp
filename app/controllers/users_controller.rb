@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def create
-    response = HTTParty.post('http://localhost:3000/signup', body:user_params)
+    response = HTTParty.post("#{@api_url}/signup", body:user_params)
     if response.success?
       @user = JSON.parse(response.to_s)
       cookies[:token] = @user['auth_token']
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def authenticate
-    response = HTTParty.post('http://localhost:3000/auth/login', body:user_params)
+    response = HTTParty.post("#{@api_url}/auth/login", body:user_params)
     if response.success?
       @user = JSON.parse(response.to_s)
       cookies[:token] = @user['auth_token']
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    response = HTTParty.get('http://localhost:3000/user', headers: @header)
+    response = HTTParty.get("#{@api_url}/user", headers: @header)
     @user = JSON.parse(response.to_s)
   end
 

@@ -5,7 +5,7 @@ class AppointmentsController < ApplicationController
   end
 
   def create 
-    response = HTTParty.post("http://localhost:3000/pets/#{appointment_params[:pet_id]}/appointment" ,
+    response = HTTParty.post("#{api_url}/pets/#{appointment_params[:pet_id]}/appointment" ,
                               body: { vet_email: vet_email, date: appointment_params[:date] }, 
                               headers: @header)
     if response.success?
@@ -22,7 +22,7 @@ class AppointmentsController < ApplicationController
   end
 
   def vet_email
-    response = HTTParty.get('http://localhost:3000/vets', headers: @header)
+    response = HTTParty.get("#{@api_url}/vets", headers: @header)
     email = ''
     response.parsed_response.each do |vet|
       vet['pets'].each do |pet|
