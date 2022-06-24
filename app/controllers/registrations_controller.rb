@@ -37,25 +37,21 @@ class RegistrationsController < ApplicationController
     @user = user_response.parsed_response
   end
 
-  def edit
+  def update
     header = {
       'Authorization': cookies[:token]
     }
-
-    resonse = HTTParty.post("http://localhost:3000/registrations/#{registration_params[:registration_id]}")
-
-    if response.success
-      if response.success?
-        @user = response.parsed_response
-        redirect_to user_registrations_path(@user['id'])  
-      else 
-        render :new, status: :unprocessable_entity
-      end
+    response = HTTParty.post("http://localhost:3000/registrations/#{registration_params[:id]}", headers: header)
+    if response.success?
+      @user = response.parsed_response
+      redirect_to user_registrations_path(@user['id'])  
+    else  
+      render :new, status: :unprocessable_entity
     end
   end
 
   private
   def registration_params
-    params.permit(:vet_email, :pet_id, :registration_id)
+    params.permit(:vet_email, :pet_id, :id)
   end
 end
