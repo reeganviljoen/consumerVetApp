@@ -5,9 +5,8 @@ div class='card'
   div class='flex'
     h3 class='underline pr-2' Registered Vets
     = link_to 'Register a new vet' , new_user_pet_registration_path(@user['id'], pet['id']) , class:'btn btn-md btn-card', data: {'turbo_action':'advance'}  
-  - k = 0 
   - pet['registrations'].each do |registration|
-    - if k > 0 && (registration['accepted'] == true)
+    - if registration['accepted'] == true
       h4 class='pb-2' Vet: #{registration['user']}
       div class='flex'
         h4 class='underline' Appointments
@@ -20,4 +19,3 @@ div class='card'
           p class='font-bold py-2' Date and time: 
           p class='py-2' #{appointment['date'].to_time.strftime('%d %B - %H:%M')}
       hr class='border-t-4 py-2'
-    - k += 1
