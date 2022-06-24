@@ -1,13 +1,10 @@
 class RegistrationsController < ApplicationController
-  def new
-    header = {
-      'Authorization': cookies[:token]
-    }
 
-    user_response = HTTParty.get('http://localhost:3000/user', headers: header)
+  def new 
+    user_response = HTTParty.get('http://localhost:3000/user', headers: @header)
     @user = user_response.parsed_response
 
-    vet_response = HTTParty.get('http://localhost:3000/vets', headers: header)
+    vet_response = HTTParty.get('http://localhost:3000/vets', headers: @header)
     vets_hash = vet_response.parsed_response
     @vets = []
     vets_hash.each do |vet|
@@ -16,10 +13,8 @@ class RegistrationsController < ApplicationController
   end
   
   def create
-    header = {
-      'Authorization': cookies['token']
-    }
-    response = HTTParty.post("http://localhost:3000/pets/#{registration_params[:pet_id]}/register" , body: {vet_email: registration_params[:vet_email]}, headers:header)
+    response = HTTParty.post("http://localhost:3000/pets/#{registration_params[:pet_id]}/register" , 
+          body: {vet_email: registration_params[:vet_email]}, headers: @header)
     if response.success?
       @user = response.parsed_response
       redirect_to user_pets_path(@user['id'])  
@@ -29,19 +24,12 @@ class RegistrationsController < ApplicationController
   end
 
   def index 
-    header = {
-      'Authorization': cookies[:token]
-    }
-
-    user_response = HTTParty.get('http://localhost:3000/user', headers: header)
+    user_response = HTTParty.get('http://localhost:3000/user', headers: @header)
     @user = user_response.parsed_response
   end
 
   def update
-    header = {
-      'Authorization': cookies[:token]
-    }
-    response = HTTParty.post("http://localhost:3000/registrations/#{registration_params[:id]}", headers: header)
+    response = HTTParty.post("http://localhost:3000/registrations/#{registration_params[:id]}", headers: @header)
     if response.success?
       @user = response.parsed_response
       redirect_to user_registrations_path(@user['id'])  

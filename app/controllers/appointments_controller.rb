@@ -1,20 +1,13 @@
 class AppointmentsController < ApplicationController
   def new
-    header = {
-      'Authorization': cookies[:token]
-    }
-    response = HTTParty.get('http://localhost:3000/user', headers: header)
+    response = HTTParty.get('http://localhost:3000/user', headers: @header)
     @user = response.parsed_response
   end
 
   def create 
-    header = {
-      'Authorization': cookies['token']
-    }
     response = HTTParty.post("http://localhost:3000/pets/#{appointment_params[:pet_id]}/appointment" ,
-                              body: { vet_email: vet_email(header), date: appointment_params[:date] }, 
-                              headers: header)
-
+                              body: { vet_email: vet_email, date: appointment_params[:date] }, 
+                              headers: @header)
     if response.success?
       @user = response.parsed_response
       redirect_to user_pets_path(@user['id'])  
@@ -28,8 +21,8 @@ class AppointmentsController < ApplicationController
     params.permit(:date, :pet_id, :registration_id)
   end
 
-  def vet_email(header)
-    response = HTTParty.get('http://localhost:3000/vets', headers: header)
+  def vet_email
+    response = HTTParty.get('http://localhost:3000/vets', headers: @header)
     email = ''
     response.parsed_response.each do |vet|
       vet['pets'].each do |pet|

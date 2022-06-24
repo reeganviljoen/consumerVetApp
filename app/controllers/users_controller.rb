@@ -22,10 +22,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    header = {
-      'Authorization': cookies[:token]
-    }
-    response = HTTParty.get('http://localhost:3000/user', headers: header)
+    response = HTTParty.get('http://localhost:3000/user', headers: @header)
     @user = JSON.parse(response.to_s)
   end
 
