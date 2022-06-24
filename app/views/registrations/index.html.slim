@@ -1,0 +1,17 @@
+= render 'nav', user: @user 
+= turbo_frame_tag 'content'
+  div class='page-body' 
+    div class='flex'
+      div class='mx-4'
+        h1 Registrations
+    - @user['pets'].each do |pet|
+      - pet['registrations'].each do |registration|
+        - if registration['accepted'] == false
+          div class='card'
+            div class='flex '
+              h2 #{pet['name']}
+              = form_with url: user_registration_path(@user['id'], registration['id']) do |form|
+                = form.hidden_field :accepted, value: true
+                = form.submit 'Accept', class:'btn btn-md btn-card'
+            hr class='w-full border-t-8 py-2'
+            
