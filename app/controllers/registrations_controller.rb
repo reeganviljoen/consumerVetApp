@@ -24,7 +24,7 @@ class RegistrationsController < ApplicationController
       @user = response.parsed_response
       redirect_to user_pets_path(@user['id'])  
     else 
-      render :new, status: :unprocessable_entity, alert: 'Registraion unsucessfull'
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -37,8 +37,25 @@ class RegistrationsController < ApplicationController
     @user = user_response.parsed_response
   end
 
+  def edit
+    header = {
+      'Authorization': cookies[:token]
+    }
+
+    resonse = HTTParty.post("http://localhost:3000/registrations/#{registration_params[:registration_id]}")
+
+    if response.success
+      if response.success?
+        @user = response.parsed_response
+        redirect_to user_registrations_path(@user['id'])  
+      else 
+        render :new, status: :unprocessable_entity
+      end
+    end
+  end
+
   private
   def registration_params
-    params.permit(:vet_email, :pet_id)
+    params.permit(:vet_email, :pet_id, :registration_id)
   end
 end
