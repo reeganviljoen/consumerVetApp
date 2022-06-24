@@ -28,8 +28,13 @@ class RegistrationsController < ApplicationController
     end
   end
 
-  def show 
-    
+  def index 
+    header = {
+      'Authorization': cookies[:token]
+    }
+
+    user_response = HTTParty.get('http://localhost:3000/user', headers: header)
+    @user = user_response.parsed_response
   end
 
   private
