@@ -147,12 +147,23 @@
   }
 
   .notice {
-    @apply w-full
+    @apply
     bg-blue-200
+    dark:bg-blue-600
+    rounded
+    px-2
+    py-2;
+    margin-left: 16rem
   }
   .alert {
-    @apply w-full
-    bg-yellow-200
+    @apply
+    dark:bg-red-600
+    bg-red-400
+    rounded
+    px-2
+    py-2;
+    margin-left: 16rem
   }
+
 }
 
