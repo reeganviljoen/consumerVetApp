@@ -11,4 +11,10 @@ html
     = javascript_importmap_tags
   body
     main class='container mx-auto mt-0 px-5 flex'
+      - if flash[:notice]
+        div class='notice '
+          = flash[:notice]
+      - if flash[:alert]
+        div class='alert'
+          = flash[:alert]
       = yield
