@@ -1,0 +1,6 @@
+  - if flash[:notice]
+    div class='notice'
+      h3 #{flash[:notice]}
+  - if flash[:alert]
+    div class='alert'
+      h3 #{flash[:alert]}
