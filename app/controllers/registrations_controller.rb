@@ -32,9 +32,10 @@ class RegistrationsController < ApplicationController
     response = HTTParty.post("#{@api_url}/registrations/#{registration_params[:id]}", headers: @header)
     if response.success?
       @user = response.parsed_response
+      flash[:notice] = 'Accepted registration'
       redirect_to user_registrations_path(@user['id'])  
     else  
-      render :new, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
