@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       cookies[:token] = @user['auth_token']
       redirect_to user_path(@user['id']) 
     else 
-      render :signin, status: :unauthorized
+      render :signin, alert: 'Username or password is incorrect',status: :unauthorized
     end 
   end
 
