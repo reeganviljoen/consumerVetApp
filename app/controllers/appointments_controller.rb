@@ -16,6 +16,11 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def index
+    response = HTTParty.get('http://localhost:3000/user', headers: @header)
+    @user = response.parsed_response
+  end
+
   private
   def appointment_params
     params.permit(:date, :pet_id, :registration_id)
