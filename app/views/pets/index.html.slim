@@ -1,15 +1,16 @@
 = render partial: 'layouts/nav'     
 =turbo_frame_tag 'content'
+  = render partial: 'layouts/flash'
   div class='page-body' 
     div class='flex'
       div class='mx-4'
         h1 Pets
-
-    - @user['pets'].each do |pet|
-      - if @user['role'] == 'owner'
+    - if @user['role'] == 'owner'
+      - @user['pets'].each do |pet|
         = render 'owner_pet', { pet: pet , user: @user }
-        = link_to 'add a pet' ,new_user_pet_path(@user['id']), class:'btn btn-xl btn-form', data: {'turbo_action':'advance'}
-      - else 
-        = render 'vet_pet', { pet: pet, user: @user}
-      
+      = link_to 'add a pet' ,new_user_pet_path(@user['id']), class:'btn btn-xl btn-form', data: {'turbo_action':'advance'}
+    - else 
+      - @user['pets'].each do |pet|
+        = render 'vet_pet', { pet: pet , user: @user }
+      = link_to 'add a pet' ,new_user_pet_path(@user['id']), class:'btn btn-xl btn-form', data: {'turbo_action':'advance'}
     
