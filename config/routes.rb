@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post '/signin', to: 'users#authenticate'
 
   resources :users, only: [:show] do
+    resources :appointments, only: [:index]
     resources :registrations, only: [:index, :update]
     resources :pets, only: [:index, :new, :create] do
       resources :registrations, only: [:new, :create] do
