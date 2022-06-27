@@ -1,0 +1,16 @@
+= render partial: 'layouts/nav' 
+
+=turbo_frame_tag 'content'
+  div class='page-body' 
+    div class='mx-4'
+      h1 Apointments
+    div class='card'
+      ul
+        - @user['pets'].each do |pet|
+          - pet['registrations'].each do |registration|
+            - registration['appointments'].each do |appointment|
+              li #{appointment['date'].to_time.strftime('%d %B - %H:%M')} - #{pet['name']}
+
+
+      
+    
