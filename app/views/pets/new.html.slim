@@ -1,6 +1,7 @@
-=render partila:'layouts/nav'
+=render partial:'layouts/nav'
       
 =turbo_frame_tag 'content'
+  = render partial: 'layouts/flash'
   div class='page-body'
     div class='flex flex-col w-full mt-28'
         div class='flex justify-center'
