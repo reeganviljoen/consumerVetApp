@@ -146,5 +146,13 @@
     dark:hover:bg-gray-400
   }
 
+  .notice {
+    @apply w-full
+    bg-blue-200
+  }
+  .alert {
+    @apply w-full
+    bg-yellow-200
+  }
 }
 
