@@ -14,9 +14,14 @@ class PetsController < ApplicationController
     response = HTTParty.post("#{@api_url}/pets/create" , body: pet_params, headers: @header)
     if response.success?
       @user = response.parsed_response
+      flash[:notice] = 'Created pet'
       redirect_to user_pets_path(@user['id'])  
     else 
-      render :new, status: :unprocessable_entity, alert: 'Registraion unsucessfull'
+      response = HTTParty.get("#{@api_url}/user", headers: @header)
+      @user = response.parsed_response
+      flash.now[:alert] = 'Couldnt create pet'
+      render :new, status: :unprocessable_entity
+
     end
   end
 
