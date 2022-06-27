@@ -6,6 +6,7 @@ class UsersController < ApplicationController
       cookies[:token] = @user['auth_token']
       redirect_to user_path(@user['id'])  
     else 
+      flash.now[:alert] = 'User couldnt be created'
       render :new, status: :unprocessable_entity
     end
   end
