@@ -1,4 +1,4 @@
-= render 'nav', user: @user      
+= render partial: 'layouts/nav'     
 =turbo_frame_tag 'content'
   div class='page-body' 
     div class='flex'
@@ -8,7 +8,8 @@
     - @user['pets'].each do |pet|
       - if @user['role'] == 'owner'
         = render 'owner_pet', { pet: pet , user: @user }
+        = link_to 'add a pet' ,new_user_pet_path(@user['id']), class:'btn btn-xl btn-form', data: {'turbo_action':'advance'}
       - else 
         = render 'vet_pet', { pet: pet, user: @user}
       
-    = link_to 'add a pet' ,new_user_pet_path(@user['id']), class:'btn btn-xl btn-form', data: {'turbo_action':'advance'}
+    
