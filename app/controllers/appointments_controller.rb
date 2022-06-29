@@ -5,10 +5,11 @@ class AppointmentsController < ApplicationController
   end
 
   def create 
-    response = HTTParty.post("#{api_url}/pets/#{appointment_params[:pet_id]}/appointment" ,
+    response = HTTParty.post("#{@api_url}/pets/#{appointment_params[:pet_id]}/appointment" ,
                               body: { vet_email: vet_email, date: appointment_params[:date] }, 
                               headers: @header)
-    if response.success?
+    binding.pry
+    if response.created?
       @user = response.parsed_response
       redirect_to user_pets_path(@user['id'])  
     else 

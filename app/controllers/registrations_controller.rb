@@ -15,7 +15,7 @@ class RegistrationsController < ApplicationController
   def create
     response = HTTParty.post("#{@api_url}/pets/#{registration_params[:pet_id]}/register" , 
           body: {vet_email: registration_params[:vet_email]}, headers: @header)
-    if response.success?
+    if response.created?
       @user = response.parsed_response
       redirect_to user_pets_path(@user['id'])  
     else 

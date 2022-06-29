@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def create
     response = HTTParty.post("#{@api_url}/signup", body:user_params)
-    if response.success?
+    if response.created?
       @user = response.parsed_response
       cookies[:token] = @user['auth_token']
       redirect_to user_path(@user['id'])  
