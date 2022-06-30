@@ -1,7 +1,5 @@
 class AppointmentsController < ApplicationController
-  def new
-    @user = VetsApi::UsersApi.new(cookies[:token]).get_user
-  end
+  before_action :set_user, only: [:new, :index]
 
   def create 
     response = VetsApi::AppoinntmentsApi.new(cookies[:token], params:appointment_params).create_appointment
@@ -15,12 +13,12 @@ class AppointmentsController < ApplicationController
     end
   end
 
-  def index
-    @user = VetsApi::UsersApi.new(token = cookies[:token]).get_user
-  end
-
   private
   def appointment_params
     params.permit(:date, :pet_id, :registration_id)
+  end
+
+  def set_user
+    @user = VetsApi::UsersApi.new(token = cookies[:token]).get_user 
   end
 end
