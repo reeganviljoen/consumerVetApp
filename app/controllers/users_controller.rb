@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def authenticate
-    response = HTTParty.post("#{@api_url}/auth/login", body:user_params)
+    response = PetsApi::UsersApi.new(params: user_params).authenticate
     if response.success?
       @user = response.parsed_response
       cookies[:token] = @user['auth_token']
