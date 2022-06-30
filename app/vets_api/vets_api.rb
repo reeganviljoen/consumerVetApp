@@ -35,10 +35,14 @@ class VetsApi
       response = HTTParty.post("#{@api_url}/pets/#{@params[:pet_id]}/register",
       body: {vet_email: @params[:vet_email]}, headers: @header)
     end
-    
+
     def accept_registration 
       response = HTTParty.post("#{@api_url}/registrations/#{@params[:id]}", headers: @header)
     end
+  end
+
+  class AppoinntmentsApi < VetsApi 
+    
   end
 end
 

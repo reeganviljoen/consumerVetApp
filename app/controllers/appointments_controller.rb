@@ -25,7 +25,7 @@ class AppointmentsController < ApplicationController
   end
 
   def vet_email
-    response = HTTParty.get("#{@api_url}/vets", headers: @header)
+    response = VetsApi::UsersApi.new(cookies[:token]).get_vets
     email = ''
     response.parsed_response.each do |vet|
       vet['pets'].each do |pet|
