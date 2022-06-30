@@ -11,6 +11,10 @@ class VetsApi
       response.parsed_response 
     end
 
+    def get_vets
+      vet_response = HTTParty.get("#{@api_url}/vets", headers: @header)
+    end
+    
     def create_user
       response = HTTParty.post("#{@api_url}/signup", body:@params)
     end
@@ -24,6 +28,10 @@ class VetsApi
     def create_pet
       response = HTTParty.post("#{@api_url}/pets/create" , body:@params, headers: @header)
     end
+  end
+
+  class RegistrationsApi < VetsApi
+
   end
 end
 

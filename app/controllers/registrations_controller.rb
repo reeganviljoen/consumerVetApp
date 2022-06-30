@@ -3,10 +3,9 @@ class RegistrationsController < ApplicationController
   def new 
     @user = VetsApi::UsersApi.new(cookies[:token]).get_user
 
-    vet_response = HTTParty.get("#{@api_url}/vets", headers: @header)
-    vets_hash = vet_response.parsed_response
+    vets_response = VetsApi::UsersApi.new(cookies[:token]).get_vets
     @vets = []
-    vets_hash.each do |vet|
+    vets_response.each do |vet|
       @vets.push([vet['name'],vet['email']])
     end
   end
