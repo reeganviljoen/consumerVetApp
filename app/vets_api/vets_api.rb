@@ -49,7 +49,6 @@ class VetsApi
     end
 
     private
-
     def vet_email
       response = HTTParty.get("#{@api_url}/vets", headers: @header)
       email = ''
