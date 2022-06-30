@@ -9,6 +9,8 @@ class AppointmentsController < ApplicationController
       @user = response.parsed_response
       redirect_to user_pets_path(@user['id'])  
     else 
+      @user = VetsApi::UsersApi.new(cookies[:token]).get_user
+      flash.now[:alert] = 'Couldnt create Appointment'
       render :new, status: :unprocessable_entity
     end
   end
