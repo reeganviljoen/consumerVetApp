@@ -11,8 +11,7 @@ class RegistrationsController < ApplicationController
   end
   
   def create
-    response = HTTParty.post("#{@api_url}/pets/#{registration_params[:pet_id]}/register" , 
-          body: {vet_email: registration_params[:vet_email]}, headers: @header)
+    response = VetsApi::RegistrationsApi.new(cookies[:token], params: registration_params ).create_registration
     if response.created?
       @user = response.parsed_response
       redirect_to user_pets_path(@user['id'])  
