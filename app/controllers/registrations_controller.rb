@@ -27,12 +27,14 @@ class RegistrationsController < ApplicationController
   end
 
   def update
-    response = HTTParty.post("#{@api_url}/registrations/#{registration_params[:id]}", headers: @header)
+    response = VetsApi::RegistrationsApi.new(cookies[:token], params: registration_params).accept_registration
     if response.success?
       @user = response.parsed_response
       flash[:notice] = 'Accepted registration'
       redirect_to user_registrations_path(@user['id'])  
     else  
+      @user = VetsApi::UsersApi.new(cookies[:token]).get_user
+      flash.now[:alert] = 'Couldnt accept registration'
       render :edit, status: :unprocessable_entity
     end
   end
