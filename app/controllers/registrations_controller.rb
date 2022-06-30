@@ -1,8 +1,8 @@
+require_relative '../PetsApi/UsersApi'
 class RegistrationsController < ApplicationController
 
   def new 
-    user_response = HTTParty.get("#{@api_url}/user", headers: @header)
-    @user = user_response.parsed_response
+    @user = PetsApi::UsersApi.new(token = cookies[:token]).get_user
 
     vet_response = HTTParty.get("#{@api_url}/vets", headers: @header)
     vets_hash = vet_response.parsed_response
@@ -24,8 +24,7 @@ class RegistrationsController < ApplicationController
   end
 
   def index 
-    user_response = HTTParty.get("#{@api_url}/user", headers: @header)
-    @user = user_response.parsed_response
+    @user = PetsApi::UsersApi.new(token = cookies[:token]).get_user
   end
 
   def update

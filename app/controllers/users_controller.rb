@@ -1,3 +1,4 @@
+require_relative '../PetsApi/UsersApi'
 class UsersController < ApplicationController
   def create
     response = HTTParty.post("#{@api_url}/signup", body:user_params)
@@ -24,8 +25,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    response = HTTParty.get("#{@api_url}/user", headers: @header)
-    @user = response.parsed_response
+    @user = PetsApi::UsersApi.new(token = cookies[:token]).get_user
   end
 
   private

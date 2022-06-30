@@ -1,7 +1,7 @@
+require_relative '../PetsApi/UsersApi'
 class AppointmentsController < ApplicationController
   def new
-    response = HTTParty.get('http://localhost:3000/user', headers: @header)
-    @user = response.parsed_response
+    @user = PetsApi::UsersApi.new(token = cookies[:token]).get_user
   end
 
   def create 
@@ -18,8 +18,7 @@ class AppointmentsController < ApplicationController
   end
 
   def index
-    response = HTTParty.get('http://localhost:3000/user', headers: @header)
-    @user = response.parsed_response
+    @user = PetsApi::UsersApi.new(token = cookies[:token]).get_user
   end
 
   private

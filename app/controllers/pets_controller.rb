@@ -1,13 +1,11 @@
-class PetsController < ApplicationController
-  
+require_relative '../PetsApi/UsersApi'
+class PetsController < ApplicationController  
   def index
-    response = HTTParty.get("#{@api_url}/user", headers: @header)
-    @user = response.parsed_response
+    @user = PetsApi::UsersApi.new(token = cookies[:token]).get_user
   end
 
   def new
-    response = HTTParty.get("#{@api_url}/user", headers: @header)
-    @user = response.parsed_response
+    @user = PetsApi::UsersApi.new(token = cookies[:token]).get_user
   end
 
   def create
