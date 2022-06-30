@@ -1,7 +1,6 @@
-require_relative '../PetsApi/UsersApi'
 class UsersController < ApplicationController
   def create
-    response = HTTParty.post("#{@api_url}/signup", body:user_params)
+    response = PetsApi::UsersApi.new(params: user_params).create_user
     if response.created?
       @user = response.parsed_response
       cookies[:token] = @user['auth_token']

@@ -1,4 +1,3 @@
-require_relative '../PetsApi/UsersApi'
 class PetsController < ApplicationController  
   def index
     @user = PetsApi::UsersApi.new(token = cookies[:token]).get_user

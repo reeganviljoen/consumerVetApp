@@ -1,4 +1,3 @@
-require_relative '../PetsApi/UsersApi'
 class RegistrationsController < ApplicationController
 
   def new 

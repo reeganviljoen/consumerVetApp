@@ -1,4 +1,3 @@
-require_relative '../PetsApi/UsersApi'
 class AppointmentsController < ApplicationController
   def new
     @user = PetsApi::UsersApi.new(token = cookies[:token]).get_user
@@ -8,7 +7,6 @@ class AppointmentsController < ApplicationController
     response = HTTParty.post("#{@api_url}/pets/#{appointment_params[:pet_id]}/appointment" ,
                               body: { vet_email: vet_email, date: appointment_params[:date] }, 
                               headers: @header)
-    binding.pry
     if response.created?
       @user = response.parsed_response
       redirect_to user_pets_path(@user['id'])  
