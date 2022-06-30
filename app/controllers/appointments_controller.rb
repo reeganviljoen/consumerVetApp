@@ -27,7 +27,7 @@ class AppointmentsController < ApplicationController
   def vet_email
     response = VetsApi::UsersApi.new(cookies[:token]).get_vets
     email = ''
-    response.parsed_response.each do |vet|
+    response.each do |vet|
       vet['pets'].each do |pet|
         pet['registrations'].each do |registration| 
           if registration['id'].to_s == appointment_params[:registration_id]
