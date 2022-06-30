@@ -1,10 +1,10 @@
 class PetsController < ApplicationController  
   def index
-    @user = PetsApi::UsersApi.new(token = cookies[:token]).get_user
+    @user = VetsApi::UsersApi.new(token = cookies[:token]).get_user
   end
 
   def new
-    @user = PetsApi::UsersApi.new(token = cookies[:token]).get_user
+    @user = VetsApi::UsersApi.new(token = cookies[:token]).get_user
   end
 
   def create

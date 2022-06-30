@@ -1,7 +1,7 @@
 class RegistrationsController < ApplicationController
 
   def new 
-    @user = PetsApi::UsersApi.new(token = cookies[:token]).get_user
+    @user = VetsApi::UsersApi.new(token = cookies[:token]).get_user
 
     vet_response = HTTParty.get("#{@api_url}/vets", headers: @header)
     vets_hash = vet_response.parsed_response

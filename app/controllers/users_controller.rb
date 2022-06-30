@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def create
-    response = PetsApi::UsersApi.new(params: user_params).create_user
+    response = vetsApi::UsersApi.new(params: user_params).create_user
     if response.created?
       @user = response.parsed_response
       cookies[:token] = @user['auth_token']
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def authenticate
-    response = PetsApi::UsersApi.new(params: user_params).authenticate
+    response = VetsApi::UsersApi.new(params: user_params).authenticate
     if response.success?
       @user = response.parsed_response
       cookies[:token] = @user['auth_token']
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = PetsApi::UsersApi.new(token = cookies[:token]).get_user
+    @user = VetsApi::UsersApi.new(token = cookies[:token]).get_user
   end
 
   private

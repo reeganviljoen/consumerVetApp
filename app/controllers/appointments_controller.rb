@@ -1,6 +1,6 @@
 class AppointmentsController < ApplicationController
   def new
-    @user = PetsApi::UsersApi.new(token = cookies[:token]).get_user
+    @user = VetsApi::UsersApi.new(token = cookies[:token]).get_user
   end
 
   def create 
