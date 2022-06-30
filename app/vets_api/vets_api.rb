@@ -1,5 +1,5 @@
 class VetsApi
-  def initialize(token='', params: {})
+  def initialize(token = '', params: {})
     @header = {'Authorization': token}
     @params = params
     @api_url = 'http://localhost:3000'
@@ -17,6 +17,12 @@ class VetsApi
 
     def authenticate
       response = HTTParty.post("#{@api_url}/auth/login", body:@params)
+    end
+  end
+
+  class PetsApi < VetsApi
+    def create_pet
+      response = HTTParty.post("#{@api_url}/pets/create" , body:@params, headers: @header)
     end
   end
 end

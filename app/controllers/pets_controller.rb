@@ -1,14 +1,14 @@
 class PetsController < ApplicationController  
   def index
-    @user = VetsApi::UsersApi.new(token = cookies[:token]).get_user
+    @user = VetsApi::UsersApi.new(cookies[:token]).get_user
   end
 
   def new
-    @user = VetsApi::UsersApi.new(token = cookies[:token]).get_user
+    @user = VetsApi::UsersApi.new(cookies[:token]).get_user
   end
 
   def create
-    response = HTTParty.post("#{@api_url}/pets/create" , body: pet_params, headers: @header)
+    response = VetsApi::PetsApi.new(cookies[:token], params: pet_params).create_pet
     if response.created?
       @user = response.parsed_response
       flash[:notice] = 'Created pet'
