@@ -16,7 +16,7 @@ class AppointmentsController < ApplicationController
   end
 
   def index
-    @user = PetsApi::UsersApi.new(token = cookies[:token]).get_user
+    @user = VetsApi::UsersApi.new(token = cookies[:token]).get_user
   end
 
   private
