@@ -14,8 +14,7 @@ class PetsController < ApplicationController
       flash[:notice] = 'Created pet'
       redirect_to user_pets_path(@user['id'])  
     else 
-      response = HTTParty.get("#{@api_url}/user", headers: @header)
-      @user = response.parsed_response
+      @user = VetsApi::UsersApi.new(cookies[:token]).get_user
       flash.now[:alert] = 'Couldnt create pet'
       render :new, status: :unprocessable_entity
     end
