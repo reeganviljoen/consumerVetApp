@@ -1,12 +1,6 @@
 class PetsController < ApplicationController  
-  def index
-    @user = VetsApi::UsersApi.new(cookies[:token]).get_user
-  end
-
-  def new
-    @user = VetsApi::UsersApi.new(cookies[:token]).get_user
-  end
-
+  before_action :set_user, only: [:index, :new]
+  
   def create
     response = VetsApi::PetsApi.new(cookies[:token], params: pet_params).create_pet
     if response.created?
@@ -23,5 +17,9 @@ class PetsController < ApplicationController
   private
   def pet_params
     params.permit(:name, :animal)
+  end
+
+  def set_user
+    @user = VetsApi::UsersApi.new(cookies[:token]).get_user
   end
 end
