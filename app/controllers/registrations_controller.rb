@@ -1,8 +1,7 @@
 class RegistrationsController < ApplicationController
+  before_action :set_user, only: [:index, :new]
 
   def new 
-    @user = VetsApi::UsersApi.new(cookies[:token]).get_user
-
     vets_response = VetsApi::UsersApi.new(cookies[:token]).get_vets
     @vets = []
     vets_response.each do |vet|
@@ -22,10 +21,6 @@ class RegistrationsController < ApplicationController
     end
   end
 
-  def index 
-    @user = VetsApi::UsersApi.new(token = cookies[:token]).get_user
-  end
-
   def update
     response = VetsApi::RegistrationsApi.new(cookies[:token], params: registration_params).accept_registration
     if response.success?
@@ -42,5 +37,9 @@ class RegistrationsController < ApplicationController
   private
   def registration_params
     params.permit(:vet_email, :pet_id, :id)
+  end
+
+  def set_user
+    @user = VetsApi::UsersApi.new(cookies[:token]).get_user
   end
 end
