@@ -1,4 +1,4 @@
-class BVetsApi::Registration < VetsApi
+class VetsApi::Registration < VetsApi
   def create_registration
     response = HTTParty.post("#{@api_url}/pets/#{@params[:pet_id]}/register",
     body: {vet_email: @params[:vet_email]}, headers: @header)
