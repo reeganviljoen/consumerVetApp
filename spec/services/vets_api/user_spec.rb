@@ -33,7 +33,7 @@ RSpec.describe VetsApi::User do
 
     it 'it invokes the api' do
       stub_request(:post, "#{url}/signup").
-        with(body: user).
+        with(body: user, headers: headers).
           to_return(status: 200, body: body, headers: {})
 
       response = VetsApi::User.new(params: user).create_user
