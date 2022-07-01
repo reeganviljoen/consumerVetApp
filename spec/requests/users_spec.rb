@@ -1,17 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-  let(:test_api) { instance_double 'VetsApi::UsersApi'}
-  let(:user) do 
-    {
-        name: 'foo',
-        email: 'foo@bar.com',
-        password: 'password',
-        role: 'owner'
-    }
-  end
+  # let(:url) { 'http://localhost' }
+  # stub_request(:post, url, '/signup')
 
-  describe "POST /signup" do
-    before { }
-  end
+  # describe "POST /signup" do
+  #   before { }
+  # end
 end
