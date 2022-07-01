@@ -50,16 +50,34 @@ RSpec.describe VetsApi::User do
     let(:params) do
       {
         vet_email: 'nicci@example.com',
-        pet_id: '2'
+        pet_id: '1'
       }
     end
 
     it 'invokes the api' do
-      stub_request(:post, "#{url}/pets/2/register").
+      stub_request(:post, "#{url}/pets/1/register").
         with(body: registration, headers: headers).
           to_return(status: 200, body: body, headers: {})
       
       response = VetsApi::Registration.new('token', params: params).create_registration
+
+      expect(response.body).to eq(body)
+    end
+  end
+
+  context '#accept_registration' do
+    let(:params) do
+      {
+        id: '1'
+      }
+    end
+  
+    it 'invokes the api' do
+      stub_request(:post, "#{url}/registrations/1").
+        with(headers: headers).
+          to_return(status: 200, body: body, headers: {})
+
+      response = VetsApi::Registration.new('token', params: params).accept_registration
 
       expect(response.body).to eq(body)
     end
