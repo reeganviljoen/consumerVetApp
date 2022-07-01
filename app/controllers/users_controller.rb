@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def create
-    response = vetsApi::User.new(params: user_params).create_user
+    response = VetsApi::User.new(params: user_params).create_user
     if response.created?
       @user = response.parsed_response
       cookies[:token] = @user['auth_token']
