@@ -43,6 +43,8 @@ RSpec.describe VetsApi::User do
           to_return(status: 200, body: body, headers: {})
       
       response = VetsApi::Pet.new('token', params: pet).create_pet
+
+      expect(response.body).to eq(body)
     end
   end
 end
