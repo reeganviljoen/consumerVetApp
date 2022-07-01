@@ -22,11 +22,20 @@ RSpec.describe VetsApi::User do
   end
 
   describe '#get_user' do
-    it 'ivokes the api' do
+    it 'invokes the api' do
       stub_request(:get, "#{url}/user").
         to_return(status: 200, body:'', headers: {})
 
       response = VetsApi::User.new('token', params:'').get_user
+    end
+  end
+
+  describe '#get_vets' do
+    it 'invokes the api' do
+      stub_request(:get, "#{url}/vets").
+        to_return(status: 200, body:'', headers:{})
+      
+      response = VetsApi::User.new('token', params:'').get_vets
     end
   end
 end
