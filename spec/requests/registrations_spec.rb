@@ -106,4 +106,24 @@ RSpec.describe 'Registrations', type: :request do
     end
   end
 
+  describe 'Patch /users/:id/registrations/:id' do
+    describe 'Post /users/:id/pets/:id/registrations' do
+      let(:dummy_api) { instance_double 'VetsApi::Registration' }
+      let(:api_response) { instance_double HTTParty::Response}
+  
+      before do
+        allow(VetsApi::Registration).to receive(:new).and_return(dummy_api)
+        allow(dummy_api).to receive(:accept_registration).and_return(api_response)
+        allow(api_response).to receive(:parsed_response).and_return({'id' => 1})
+        allow(api_response).to receive(:success?).and_return(true)
+        patch user_registration_path(1,1)
+      end
+
+      context 'when the request is valid' do
+        it 'redirects properly' do
+          expect(response).to have_http_status(302)
+        end
+      end
+    end
+  end
 end
