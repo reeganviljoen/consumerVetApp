@@ -1,7 +1,6 @@
 class VetsApi::User < VetsApi
   def get_user
     response = HTTParty.get("#{@api_url}/user", headers: @header)
-    response.parsed_response 
   end
 
   def get_vets
