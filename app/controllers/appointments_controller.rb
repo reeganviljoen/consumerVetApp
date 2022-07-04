@@ -19,6 +19,7 @@ class AppointmentsController < ApplicationController
   end
 
   def set_user
-    @user = VetsApi::User.new(token = cookies[:token]).get_user 
+    response = VetsApi::User.new(token = cookies[:token]).get_user 
+    @user = response.parsed_response
   end
 end
