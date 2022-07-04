@@ -17,7 +17,10 @@ RSpec.describe "Pets", type: :request do
                 'id' => 1,
                 'appointments' => 
                 [
-                  {'id' => 1}
+                  {
+                    'id' => 1,
+                    'date' => '2022-06-06'
+                  }
                 ]
               }
             ]
@@ -70,7 +73,7 @@ RSpec.describe "Pets", type: :request do
       post '/users/1/pets'
     end
 
-    context 'when the signup is valid' do
+    context 'when the request is valid' do
       it 'redirects to pets page succesfully' do
         expect(response).to have_http_status(302)
       end
