@@ -24,7 +24,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = VetsApi::User.new(cookies[:token]).get_user
+    response = VetsApi::User.new(cookies[:token]).get_user
+    @user = response.parsed_response
+
   end
 
   private
