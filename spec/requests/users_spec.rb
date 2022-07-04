@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Users", type: :request do
   describe "POST /users" do
     let(:dummy_api) { instance_double 'VetsApi::User' }
-    let(:api_response) { instance_double HTTParty::Response, body: {id: 1}.to_json, code: 302}
+    let(:api_response) { instance_double HTTParty::Response, body: {id: 1}.to_json, code: 201}
 
     before do 
       allow(VetsApi::User).to receive(:new).and_return(dummy_api)
@@ -14,7 +14,7 @@ RSpec.describe "Users", type: :request do
     end
 
     context 'when the signup is valid' do
-      it 'redirects to users page' do
+      it 'redirects to users page succesfully' do
         expect(response).to have_http_status(302)
       end
     end
@@ -33,7 +33,7 @@ RSpec.describe "Users", type: :request do
     end
 
     context 'when the login is valid' do
-      it 'redirectss to the user page' do
+      it 'redirectss to the user page sucecsfully' do
         expect(response).to have_http_status(302)
       end
     end
@@ -51,7 +51,7 @@ RSpec.describe "Users", type: :request do
     end
 
     context 'when the request is valid' do
-      it 'asigns returns a ststus 200'  do
+      it 'returns a ststus 200'  do
         expect(response).to have_http_status(200)
       end
     end
