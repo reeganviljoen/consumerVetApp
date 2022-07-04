@@ -40,6 +40,7 @@ class RegistrationsController < ApplicationController
   end
 
   def set_user
-    @user = VetsApi::User.new(cookies[:token]).get_user
+    response = VetsApi::User.new(cookies[:token]).get_user
+    @user = response.parsed_response
   end
 end
