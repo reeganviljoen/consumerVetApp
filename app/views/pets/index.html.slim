@@ -12,5 +12,4 @@
     - else 
       - @user['pets'].each do |pet|
         = render 'vet_pet', { pet: pet , user: @user }
-      = link_to 'add a pet' ,new_user_pet_path(@user['id']), class:'btn btn-xl btn-form', data: {'turbo_action':'advance'}
     
