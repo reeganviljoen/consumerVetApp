@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-  describe "POST /users" do
-    let(:dummy_api) { instance_double 'VetsApi::User' }
-    let(:api_response) { instance_double HTTParty::Response, body: {id: 1}.to_json, code: 201}
 
+  let(:dummy_api) { instance_double 'VetsApi::User' }
+  let(:api_response) { instance_double HTTParty::Response}
+
+  describe "POST /users" do
     before do 
       allow(VetsApi::User).to receive(:new).and_return(dummy_api)
       allow(dummy_api).to receive(:create_user).and_return(api_response)
@@ -21,9 +22,6 @@ RSpec.describe "Users", type: :request do
   end
 
   describe 'Post /login' do
-    let(:dummy_api) { instance_double 'VetsApi::User' }
-    let(:api_response) { instance_double HTTParty::Response, body: {id: 1}.to_json, code: 200}
-
     before do
       allow(VetsApi::User).to receive(:new).and_return(dummy_api)
       allow(dummy_api).to receive(:authenticate).and_return(api_response)
@@ -40,9 +38,6 @@ RSpec.describe "Users", type: :request do
   end
 
   describe 'Get /users/:id' do
-    let(:dummy_api) { instance_double 'VetsApi::User' }
-    let(:api_response) { instance_double HTTParty::Response, body: {id: 1}.to_json, code: 200}
-
     before do
       allow(VetsApi::User).to receive(:new).and_return(dummy_api)
       allow(dummy_api).to receive(:get_user).and_return(api_response)
