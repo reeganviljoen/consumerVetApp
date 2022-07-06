@@ -2,9 +2,7 @@ class UsersController < ApplicationController
   def create
     response = VetsApi::User.new(params: user_params).create_user
     if response.created?
-      @user = response.parsed_response
-      cookies[:token] = @user['auth_token']
-      redirect_to user_path(@user['id'])  
+      succesfull_response(response)
     else 
       flash.now[:alert] = 'User couldnt be created'
       render :new, status: :unprocessable_entity
@@ -14,9 +12,7 @@ class UsersController < ApplicationController
   def authenticate
     response = VetsApi::User.new(params: user_params).authenticate
     if response.success?
-      @user = response.parsed_response
-      cookies[:token] = @user['auth_token']
-      redirect_to user_path(@user['id']) 
+      succesfull_response(response)
     else 
       flash.now[:alert] = 'Email or password incorrect'
       render :signin, status: :unauthorized
@@ -31,5 +27,11 @@ class UsersController < ApplicationController
   private
   def user_params
     params.permit(:name, :email, :password, :role)
+  end
+
+  def succesfull_response(response)
+    @user = response.parsed_response
+    cookies[:token] = @user['auth_token']
+    redirect_to user_path(@user['id']) 
   end
 end
