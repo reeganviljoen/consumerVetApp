@@ -2,12 +2,7 @@ class RegistrationsController < ApplicationController
   before_action :set_user, only: [:index, :new]
 
   def new 
-    vets_response = VetsApi::User.new(cookies[:token]).get_vets
-    vets_hash = vets_response.parsed_response
-    @vets = []
-    vets_hash.each do |vet|
-      @vets.push([vet['name'],vet['email']])
-    end
+    @vets = VetsApi::User.new(cookies[:token]).get_vets
   end
   
   def create
