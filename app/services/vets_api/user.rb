@@ -4,7 +4,7 @@ class VetsApi::User < VetsApi
   end
 
   def get_vets
-    vet_response = HTTParty.get("#{@api_url}/vets", headers: @header)
+    response = HTTParty.get("#{@api_url}/vets/emails", headers: @header)
   end
 
   def create_user
